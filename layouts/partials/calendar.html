@@ -46,7 +46,7 @@
 
         {{ $posts := $allPosts.GroupByPublishDate "2006-01-02" }}
         <div class="border border-gray-dark py-2 graph-before-activity-overview">
-            <div class="js-calendar-graph mx-3 d-flex flex-column pt-1 is-graph-loading graph-canvas calendar-graph height-full text-center" data-from="" data-to="" data-url="" data-org="">
+            <div id="graph-container" class="js-calendar-graph mx-3 d-flex flex-column pt-1 is-graph-loading graph-canvas calendar-graph height-full text-center" data-from="" data-to="" data-url="" data-org="">
                 <svg width="880" height="128" class="js-calendar-graph-svg">
                     <g transform="translate(10, 20)">
                         {{- $.Scratch.Set "months" 0 }}
@@ -127,8 +127,12 @@
 
 <script type="text/javascript">
     function onClickDay(date) {
-        console.log("/archives/" + date);
         window.open("/archives/" + date + "/", "_parent");
+    }
+
+    window.onload = function () {
+        const elem = document.getElementById("graph-container")
+        elem.scrollLeft = 880
     }
 </script>
 
