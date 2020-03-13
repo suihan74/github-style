@@ -1,4 +1,6 @@
 
+/* カレンダー(コミット草) */
+
 .js-calendar-graph {
     overflow: auto;
     width: auto;
@@ -10,7 +12,6 @@
     width: auto;
     height: 256px;
 }
-
 
 /* 検索ボタン */
 
@@ -109,3 +110,14 @@ svg.header-search-button-icon {
   white-space: nowrap;
 }
 /* ここまで: アプリの紹介ブログパーツ */
+
+/* 記事スクリーンショット */
+
+.post-ss-area {
+  display: table;
+}
+
+.post-ss {
+  float: left;
+  max-width: 112px;
+}
