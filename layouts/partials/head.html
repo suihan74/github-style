@@ -8,7 +8,14 @@
     <link crossorigin="anonymous" media="all"
         rel="stylesheet" href='{{ printf "%s?%s" ("css/user.css" | absURL) (now.Format "20060102150405") }}'/>
     <meta name="viewport" content="width=device-width">
+
     <title>{{ if .IsHome }}{{ else }}{{ .Title }} - {{ end }}{{ .Site.Title }}</title>
+
+<!-- noindex:true が指定されたページは検索除けする -->
+    {{- if .Params.noindex }}
+    <meta name=”robots” content=”noindex”>
+    {{- end }}
+
 <!-- OGP -->
     <meta property="og:url" content="{{ .URL | absURL }}"/>
     <meta property="og:site_name" content="{{ .Site.Title }}"/>
