@@ -1,4 +1,16 @@
 
+/* サイトタイトル */
+
+.site-title-text {
+  margin-left: 8px;
+}
+
+/* アバター画像を丸める */
+.avatar-user {
+  border-radius: 50%!important;
+  border: 1px solid #e1e4e8!important;
+}
+
 /* カレンダー(コミット草) */
 
 .js-calendar-graph {
@@ -14,6 +26,27 @@
 }
 
 /* 検索ボタン */
+
+.header-search-form {
+  color: inherit;
+  border: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.header-search-wrapper {
+    display: table;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    font-size: inherit;
+    font-weight: 400;
+    color: #fff;
+    vertical-align: middle;
+    background-color: hsla(0,0%,100%,.125) !important;
+    border: 0;
+    box-shadow: none;
+}
 
 .header-search-button {
   background-color: transparent;

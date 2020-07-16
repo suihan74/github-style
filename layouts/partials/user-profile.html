@@ -7,12 +7,12 @@
             {{- with $.Site.Params.avatar }}
             <span itemprop="image" class="u-photo d-block position-relative" aria-hidden="true">
                 <img alt="" width="260" height="260"
-                    class="avatar width-full height-full rounded-2" src="{{ $.Site.Params.avatar  }}" />
+                    class="avatar avatar-user width-full height-full rounded-2" src="{{ $.Site.Params.avatar  }}" />
             </span>
             {{- else }}
             <span itemprop="image" class="u-photo d-block position-relative" aria-hidden="true">
                 <img alt="" width="260" height="260"
-                    class="avatar width-full height-full rounded-2" src="{{ "images/avatar.png" | absURL }}" />
+                    class="avatar avatar-user width-full height-full rounded-2" src="{{ "images/avatar.png" | absURL }}" />
             </span>
            {{- end }}
         </div>

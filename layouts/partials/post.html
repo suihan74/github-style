@@ -3,25 +3,20 @@
         <main id="js-repo-pjax-container" data-pjax-container="">
             <div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav pt-lg-4 "> <!-- pt-0を除去; 小画面でもタイトル表示するため -->
                 <div class="repohead-details-container clearfix container-lg p-responsive d-lg-block"> <!-- d-noneを除去 -->
-                    <div class="mb-3 d-flex">
+                    <div class="d-flex">
                         <h1 class="public css-truncate float-none flex-auto width-fit pl-0">
                             <a class="avatar mr-1" href="{{ absURL "about/" }}">
                             {{ with $.Site.Params.avatar }}
-
-                                <img
-                                    src="{{  $.Site.Params.avatar  }}" width="26" height="26">
+                                <img src="{{  $.Site.Params.avatar  }}" class="avatar-user" width="26" height="26">
                             {{ else }}
-                                <img
-                                    src="{{ "images/avatar.png" | absURL }}" width="26" height="26">
+                                <img src="{{ "images/avatar.png" | absURL }}" class="avatar-user" width="26" height="26">
                             {{ end }}
                             </a>
-                            <span class="author"><a
-                                    href="{{ absURL "about/" }}">{{ .Site.Params.author }}</a></span>
+                            <span class="author"><a href="{{ absURL "about/" }}">{{ .Site.Params.author }}</a></span>
                             <span class="path-divider">/</span>
-                            <strong itemprop="name"><a
-                                    href="{{ .Permalink }}">{{ .Title }}</a></strong>
+                            <strong itemprop="name"><a href="{{ .Permalink }}">{{ .Title }}</a></strong>
 
-                            {{ with .Params.description }}<div class="text-small text-gray">{{ . }}</div>{{ end }}
+                            {{ with .Params.description }}<div class="text-small text-gray mb-1 mt-1">{{ . }}</div>{{ end }}
 
                             <!-- display tags -->
                             <div class="text-small text-gray">
@@ -83,7 +78,7 @@
     </div>
 </div>
 {{ if .Site.Params.utterances }}
-<div class="utterances">
+<div class="utterances mt-4">
     <script src="https://utteranc.es/client.js"
             repo="{{ .Site.Params.utterances }}"
             issue-term="pathname"
