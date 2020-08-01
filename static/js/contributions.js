@@ -155,10 +155,11 @@ function yearList() {
 }
 
 function graph(year, posts, startDate, endDate) {
+  const postsStr = posts.length === 1 ? "post" : "posts";
   if (year == now.getFullYear().toString()) {
-    document.querySelector('#posts-count').innerText = `${posts.length}  posts in the last year`;
+    document.querySelector('#posts-count').innerText = `${posts.length}  ${postsStr} in the last year`;
   } else {
-    document.querySelector('#posts-count').innerText = `${posts.length}  posts in ${year}`;
+    document.querySelector('#posts-count').innerText = `${posts.length}  ${postsStr} in ${year}`;
   }
 
   let html = ``;
