@@ -197,18 +197,18 @@ function graph(year, posts, startDate, endDate) {
           color = "#ebedf0";
           break;
         case 1:
-          color = "#c6e48b";
+          color = "#9be9a8";
           break;
         case 2:
-          color = "#7bc96f";
+          color = "#40c463";
           break;
         case 3:
-          color = "#239a3b";
+          color = "#30a14e";
           break;
         default:
-          color = "#196127";
+          color = "#216e39";
       }
-      html += `<rect class="day" width="12" height="12" x="${16 - i}" y="${j * 15}"
+      html += `<rect class="day" width="11" height="11" x="${16 - i}" y="${j * 15}"
       fill="${color}" data-count="${c}"
       data-date="${dataDate}"></rect>`;
     }
