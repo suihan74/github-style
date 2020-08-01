@@ -120,8 +120,13 @@
                             class="ajax-pagination-btn btn btn-outline border-gray-dark width-full f6 mt-0 py-2 contribution-activity-show-more ">Show
                             more activity</button>
                     </div> -->
-
-
+                    <form class="js-show-more-timeline-form col-lg-10 col-12">
+                        <button name="button"
+                                class="ajax-pagination-btn btn btn-outline border-gray-dark width-full f6 mt-0 py-2 contribution-activity-show-more"
+                                data-disable-with="Loading..."
+                                onClick="showMoreActivity(this)"
+                        >Show more activity</button>
+                    </form>
                 </div>
             </div>
         </div>

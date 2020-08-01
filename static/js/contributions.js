@@ -48,10 +48,18 @@ function yearly(year) {
   }
   posts.sort((a, b) => { return b - a });
   document.querySelector('#posts-activity').innerHTML = '';
+  var count = 0;
   for (const month of ms) {
     const node = document.createElement('div');
+    if (count < 2) {
+      node.className = `term-${year}-${month+1}`;
+    }
+    else {
+      node.className = `term-${year}-${month+1} hidden`;
+    }
     node.innerHTML = monthly(year, month, posts);
     document.querySelector('#posts-activity').appendChild(node);
+    count++;
   }
 
   graph(year, posts, startDate, endDate);
@@ -103,7 +111,7 @@ function monthly(year, month, posts) {
         <button type="button" class="btn-link f4 muted-link no-underline lh-condensed width-full js-details-target "
           aria-expanded="false">
           <span class="float-left ws-normal text-left">
-            Created ${monthPosts.length} post
+            Created ${monthPosts.length} post${monthPosts.length > 1 ? 's' : ''}
           </span>
           <span class="d-inline-block float-right">
             <span class="profile-rollup-toggle-closed float-right" aria_label="Collapse"><svg class="octicon octicon-fold"
@@ -143,7 +151,7 @@ function yearList() {
   for (let i = 0; i < years.length; i++) {
     const year = years[i];
     const node = document.createElement('li');
-    node.innerHTML = `<a class="js-year-link filter-item px-3 mb-2 py-2" aria-label="Post activity in ${year}" onclick="yearly('${year}') | event.stopPropagation()">${year}</a>`;
+    node.innerHTML = `<a class="js-year-link filter-item px-3 mb-2 py-2" aria-label="Post activity in ${year}" onclick="selectYear('${year}')">${year}</a>`;
     document.querySelector('#year-list').appendChild(node);
   }
 }
@@ -210,7 +218,7 @@ function graph(year, posts, startDate, endDate) {
       }
       html += `<rect class="day" width="11" height="11" x="${16 - i}" y="${j * 15}"
       fill="${color}" data-count="${c}"
-      data-date="${dataDate}"></rect>`;
+      data-date="${dataDate}" onClick="onClickRect(this, ${year},${date.getMonth()},${date.getDate()},${c > 0})"></rect>`;
     }
     html += '</g>';
   }
@@ -239,5 +247,101 @@ style="display: none;">Thu</text>
 style="display: none;">Sat</text>
 `;
   document.querySelector('#graph-svg').innerHTML = html;
-  stopClickEvent('.day');
+//  stopClickEvent('.day');
+}
+
+function resetSelectedStates(activities, parent, rects) {
+    // reset selected states
+    var activityCount = 0;
+    for (const item of activities) {
+      if (activityCount < 2) {
+        item.classList.remove('hidden');
+      }
+      else if (!item.classList.contains('hidden')) {
+        item.classList.add('hidden');
+      }
+      activityCount++;
+    }
+
+    parent.classList.remove('days-selected');
+    for (const r of rects) {
+      r.classList.remove('active');
+    }
+
+    // show a button
+    const showMoreActivityButton = document.querySelector('.contribution-activity-show-more')
+    showMoreActivityButton.classList.remove('hidden');
+}
+
+function onClickRect(self, year, month, day, hasPosts) {
+  if (!hasPosts) {
+    event.stopPropagation();
+    return;
+  }
+
+  const activities = document.querySelector('#posts-activity').childNodes;
+  const parent = document.querySelector('.calendar-graph');
+  const rects = document.querySelectorAll('.day');
+
+  if (self.classList.contains('active')) {
+    // reset selected states
+    resetSelectedStates(activities, parent, rects);
+  }
+  else {
+    // select a rect
+    const targetClass = `term-${year}-${month+1}`;
+    for (const item of activities) {
+      if (item.classList.contains(targetClass)) {
+        item.classList.remove('hidden');
+      }
+      else if (!item.classList.contains('hidden')) {
+        item.classList.add('hidden');
+      }
+    }
+
+    if (!parent.classList.contains('days-selected')) {
+      parent.classList.add('days-selected');
+    }
+    for (const r of rects) {
+      if (r !== self) {
+        r.classList.remove('active');
+      }
+      else {
+        r.classList.add('active');
+      }
+    }
+
+    // hide a button
+    const showMoreActivityButton = document.querySelector('.contribution-activity-show-more')
+    if (!showMoreActivityButton.classList.contains('hidden')) {
+      showMoreActivityButton.classList.add('hidden');
+    }
+  }
+
+  event.stopPropagation();
+}
+
+
+function showMoreActivity(self) {
+  const activities = document.querySelector('#posts-activity').childNodes;
+  for (const item of activities) {
+    item.classList.remove('hidden');
+  }
+  self.classList.add('hidden');
+  event.stopPropagation();
+}
+
+
+function selectYear(yearStr) {
+  // switch year
+  yearly(yearStr);
+
+  const activities = document.querySelector('#posts-activity').childNodes;
+  const parent = document.querySelector('.calendar-graph');
+  const rects = document.querySelectorAll('.day');
+
+  resetSelectedStates(activities, parent, rects);
+
+  //
+  event.stopPropagation();
 }
