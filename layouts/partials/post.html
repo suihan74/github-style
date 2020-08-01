@@ -87,9 +87,12 @@
         async>
 </script> -->
 <script>
+/*
     var systemThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     var systemTheme = systemThemeMediaQuery.matches ? 'dark' : 'light';
     var utterancesTheme = systemTheme === 'dark' ? 'github-dark' : 'github-light';
+*/
+    var utterancesTheme = {{ if $.Site.Params.disableDarkMode }}'github-light'{{ else }}'github-dark'{{end}}
     var utterancesScript = document.createElement('script');
     utterancesScript.src = 'https://utteranc.es/client.js';
     utterancesScript.setAttribute('repo', '{{ .Site.Params.utterances }}');
