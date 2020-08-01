@@ -7,13 +7,13 @@
                         <h1 class="public css-truncate float-none flex-auto width-fit pl-0">
                             <a class="avatar mr-1" href="{{ absURL "about/" }}">
                             {{ with $.Site.Params.avatar }}
-                                <img src="{{  $.Site.Params.avatar  }}" class="avatar-user" width="26" height="26">
+                                <img src="{{  $.Site.Params.avatar  }}" class="avatar-user" width="26" height="26" title="{{ $.Site.Params.author }}">
                             {{ else }}
-                                <img src="{{ "images/avatar.png" | absURL }}" class="avatar-user" width="26" height="26">
+                                <img src="{{ "images/avatar.png" | absURL }}" class="avatar-user" width="26" height="26" title="{{ $.Site.Params.author }}">
                             {{ end }}
                             </a>
-                            <span class="author"><a href="{{ absURL "about/" }}">{{ .Site.Params.author }}</a></span>
-                            <span class="path-divider">/</span>
+<!--                            <span class="author"><a href="{{ absURL "about/" }}">{{ .Site.Params.author }}</a></span>
+                            <span class="path-divider">/</span> -->
                             <strong itemprop="name"><a href="{{ .Permalink }}">{{ .Title }}</a></strong>
 
                             {{ with .Params.description }}<div class="text-small text-gray mb-1 mt-1">{{ . }}</div>{{ end }}
