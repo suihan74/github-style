@@ -70,3 +70,7 @@ copyright = "© 2019. Theme by <a href=\"https://github.com/MeiK2333/github-styl
 [minify]
   disableSVG = true
 ```
+
+## Assets
+
+- [Octicons](https://primer.style/octicons/) ([primer/octicons - GitHub](https://github.com/primer/octicons))
