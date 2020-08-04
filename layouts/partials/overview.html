@@ -52,13 +52,14 @@
         </div>
         {{ $mainSections := .Site.Params.mainSections | default (slice "post") }}
         {{ $section := where .Site.RegularPages "Section" "in" $mainSections }}
+        {{ $dummy := "" }}
         <div id="contributions" data='[{{ range $index, $elem := $section }}
-{
-    "title": "{{ .Title }}",
-    "link": "{{ .Permalink }}",
-    "publishDate": "{{ .PublishDate.Format "2006-01-02 15:04:05" }}"
-}{{ if ne $index (sub (len $section) 1) }},{{ end }}
-{{ end }}]'>
+{{- $dummy -}}  {
+{{- $dummy -}}      "title": "{{ .Title }}",
+{{- $dummy -}}      "link": "{{ .Permalink }}",
+{{- $dummy -}}      "publishDate": "{{ .PublishDate.Format "2006-01-02 15:04:05" }}"
+{{- $dummy -}}  }{{ if ne $index (sub (len $section) 1) }},{{ end }}
+{{- end -}}]'>
             <div class="mt-4 position-relative">
                 <div class="js-yearly-contributions">
                     <div class="position-relative">
