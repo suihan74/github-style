@@ -2,9 +2,14 @@
 
 ## Customized points by suihan74
 
-https://suihan74.github.io/posts/2019/12_26_00_theme_customize/
+[Hugoテーマのカスタマイズ箇所メモ - すいはんぶろぐ.io](https://suihan74.github.io/posts/2019/12_26_00_theme_customize/)
 
 ---
+
+## Requirements
+
+- [Hugo v0.68.0 or higher](https://github.com/gohugoio/hugo/releases)  
+  to use minify configuration
 
 ## Install the theme
 
@@ -28,7 +33,7 @@ hugo new about.md
 
 add `layout = "about"` to `content/about.md`
 
-```
+```md
 ---
 title: "About"
 date: 2019-10-22T18:46:47+08:00
@@ -60,4 +65,8 @@ copyright = "© 2019. Theme by <a href=\"https://github.com/MeiK2333/github-styl
   avatar = "https://example.com/images/avatar.png"
   url = "https://example.com"
   keywords = "blog, google analytics"
+
+# this section is needed to escape minifying inline SVG!!
+[minify]
+  disableSVG = true
 ```
