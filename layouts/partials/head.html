@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.Description }}{{ else }}{{ .Params.Description }}{{ end }}" />
     <meta name="keywords"
-        content="{{ with .Params.Keywords }}{{ delimit . ", " }}{{ else }}{{ $.Site.Params.Keywords }}{{ end }}" />
+        content="{{ with .Params.Tags }}{{ delimit . ", " }}{{ else }}{{ with $.Site.Params.Keywords }}{{ delimit . ", " }}{{ end }}{{ end }}" />
     <link rel="canonical" href="{{ .Permalink }}" />
 
     <!-- Twitter Card -->
