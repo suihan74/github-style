@@ -29,7 +29,7 @@
     <meta name="twitter:image" content="{{ if .IsHome }}{{ $.Site.Params.avatar | absURL }}{{ else }}{{ .Params.Cover | absURL }}{{ end }}">
 
     <!-- OGP -->
-    <meta property="og:url" content="{{ .URL | absURL }}"/>
+    <meta property="og:url" content="{{ .Permalink | absURL }}"/>
     <meta property="og:site_name" content="{{ .Site.Title }}"/>
     {{- if .IsHome }}
     <meta property="og:type" content="website" />
