@@ -12,7 +12,13 @@
     {{ else }}
     <link crossorigin="anonymous" media="(prefers-color-scheme: dark)" rel="stylesheet"
         href="{{ "css/dark.css" | absURL }}" />
-    {{end}}
+    {{ end }}
+
+    {{ if $.IsPage }}
+    <!-- 記事中の画像をポップアップ表示する -->
+    <link crossorigin="anonymous" media="all" rel="stylesheet"
+        href="{{ "css/lightbox.css" | absURL }}" />
+    {{ end }}
 
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.Description }}{{ else }}{{ .Params.Description }}{{ end }}" />
