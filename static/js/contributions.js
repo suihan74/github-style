@@ -20,14 +20,14 @@ let contributions;
   }
 
   yearList();
-  yearly(year.toString());
+  yearly(year);
 })();
 
 function yearly(year) {
   let startDate;
   let endDate;
-  if (year != now.getFullYear().toString()) {
-    const date = new Date(year);
+  if (year != now.getFullYear()) {
+    const date = new Date(year.toString());
     startDate = new Date(date.getTime() - date.getDay() * 24 * 60 * 60 * 1000);
     endDate = new Date(date.getFullYear(), 11, 31);
   } else {
@@ -41,23 +41,29 @@ function yearly(year) {
   for (const item of contributions) {
     if (item.date >= startDate && item.date <= endDate) {
       posts.push(item);
-      if (!ms.includes(item.date.getMonth())) {
-        ms.push(item.date.getMonth());
+      const y = year - item.date.getFullYear();
+      const relativeMonth = item.date.getMonth() - 12 * y;
+      if (!ms.includes(relativeMonth)) {
+        ms.push(relativeMonth);
       }
     }
   }
   posts.sort((a, b) => { return b - a });
   document.querySelector('#posts-activity').innerHTML = '';
   var count = 0;
-  for (const month of ms) {
+  for (const relativeMonth of ms) {
     const node = document.createElement('div');
+
+    const itemYear = relativeMonth >= 0 ? year : year + Math.floor(relativeMonth / 12);
+    const itemMonth = relativeMonth >= 0 ? relativeMonth : 12 + relativeMonth % 12;
+
     if (count < 2) {
-      node.className = `term-${year}-${month+1}`;
+      node.className = `term-${itemYear}-${itemMonth+1}`;
     }
     else {
-      node.className = `term-${year}-${month+1} hidden`;
+      node.className = `term-${itemYear}-${itemMonth+1} hidden`;
     }
-    node.innerHTML = monthly(year, month, posts);
+    node.innerHTML = monthly(itemYear, itemMonth, posts);
     document.querySelector('#posts-activity').appendChild(node);
     count++;
   }
@@ -66,7 +72,7 @@ function yearly(year) {
 
   const yearList = document.querySelectorAll('.js-year-link');
   for (const elem of yearList) {
-    if (elem.innerText == year) {
+    if (elem.innerText == year.toString()) {
       elem.classList.add('selected');
     } else {
       elem.classList.remove('selected');
@@ -75,7 +81,9 @@ function yearly(year) {
 }
 
 function monthly(year, month, posts) {
-  const monthPosts = posts.filter(post => post.date.getFullYear().toString() === year && post.date.getMonth() === month);
+  const monthPosts = posts.filter(post =>
+    post.date.getFullYear() === year && post.date.getMonth() === month
+  );
   let liHtml = '';
   for (const post of monthPosts) {
     liHtml += `<li class="d-flex mt-1 py-1 flex-row flex-nowrap flex-justify-between"><span class="flex-auto css-truncate css-truncate-target">
@@ -133,14 +141,14 @@ function yearList() {
   for (let i = 0; i < years.length; i++) {
     const year = years[i];
     const node = document.createElement('li');
-    node.innerHTML = `<a class="js-year-link filter-item px-3 mb-2 py-2" aria-label="Post activity in ${year}" onclick="selectYear('${year}')">${year}</a>`;
+    node.innerHTML = `<a class="js-year-link filter-item px-3 mb-2 py-2" aria-label="Post activity in ${year}" onclick="selectYear(${year})">${year}</a>`;
     document.querySelector('#year-list').appendChild(node);
   }
 }
 
 function graph(year, posts, startDate, endDate) {
   const postsStr = posts.length === 1 ? "post" : "posts";
-  if (year == now.getFullYear().toString()) {
+  if (year === now.getFullYear()) {
     document.querySelector('#posts-count').innerText = `${posts.length}  ${postsStr} in the last year`;
   } else {
     document.querySelector('#posts-count').innerText = `${posts.length}  ${postsStr} in ${year}`;
@@ -201,7 +209,7 @@ function graph(year, posts, startDate, endDate) {
       }
       html += `<rect class="day" width="11" height="11" x="${16 - i}" y="${j * 15}"
       fill="${color}" data-count="${c}"
-      data-date="${dataDate}" onClick="onClickRect(this, ${year},${date.getMonth()},${date.getDate()},${c > 0})"></rect>`;
+      data-date="${dataDate}" onClick="onClickRect(this, ${date.getFullYear()},${date.getMonth()},${date.getDate()},${c > 0})"></rect>`;
     }
     html += '</g>';
   }
@@ -315,9 +323,9 @@ function showMoreActivity(self) {
 }
 
 
-function selectYear(yearStr) {
+function selectYear(year) {
   // switch year
-  yearly(yearStr);
+  yearly(year);
 
   const activities = document.querySelector('#posts-activity').childNodes;
   const parent = document.querySelector('.calendar-graph');
