@@ -27,7 +27,7 @@ function yearly(year) {
   let startDate;
   let endDate;
   if (year != now.getFullYear()) {
-    const date = new Date(year.toString());
+    const date = new Date(year, 0);
     startDate = new Date(date.getTime() - date.getDay() * 24 * 60 * 60 * 1000);
     endDate = new Date(date.getFullYear(), 11, 31);
   } else {
