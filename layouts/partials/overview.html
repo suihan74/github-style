@@ -32,15 +32,27 @@
                                     {{ .Description | safeHTML }}
                                 </div>
                                 <div class="mb-0 f6 text-gray">
-                                    {{ with .Params.tags }}
-                                        <span class="f6 text-gray mt-1">
+                                    {{- with .Params.tags }}
+                                        {{ range . }}
+                                        <a class="muted-link mr-3 d-inline-block" href="/tags/{{ lower . }}">
                                             {{ partial "octicon-tag.html" . }}
-                                            {{ range . }} <a href="/tags/{{ lower . }}/">{{ . }}</a>{{ end }}
-                                        </span>
-                                    {{ end }}
+                                            {{ . }}
+                                        </a>
+                                        {{ end }}
+                                    {{- end }}
                                     <div class="mt-1">
-                                        Updated <relative-time datetime="{{ .Lastmod.Format "2006-01-02 15:04" }}" class="no-wrap">
-                                            {{ .Lastmod.Format "2006-01-02 15:04" }}</relative-time>
+                                        <span class="d-inline-block">
+                                        Created at <time datetime="{{ .PublishDate.Format "2006-01-02 15:04" }}" class="no-wrap">
+                                            {{ .PublishDate.Format "2006-01-02 15:04" }}</time>
+                                        </span>
+
+                                        {{ if ne .PublishDate .Lastmod }}
+                                        <span class="file-info-divider"></span>
+                                        <span class="d-inline-block">
+                                        Updated at <time datetime="{{ .Lastmod.Format "2006-01-02 15:04" }}" class="no-wrap">
+                                            {{ .Lastmod.Format "2006-01-02 15:04" }}</time>
+                                        {{ end }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
