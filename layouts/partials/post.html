@@ -20,10 +20,16 @@
 
                             <!-- display tags -->
                             <div class="text-small text-gray">
-                                {{ with .Params.tags }}
-                                    {{ partial "octicon-tag.html" . }}
-                                    {{ range . }} <a href="/tags/{{ lower . }}/">{{ . }}</a>{{ end }}
-                                {{ end }}
+                                {{- with .Params.tags }}
+                                    <div class="f6 text-gray mt-1">
+                                        {{ range . }}
+                                        <a class="muted-link mr-3 d-inline-block" href="/tags/{{ . | urlize }}">
+                                            {{ partial "octicon-tag.html" . }}
+                                            {{ . }}
+                                        </a>
+                                        {{ end }}
+                                    </div>
+                                {{- end }}
                             </div>
 
                             <!-- display timestamp -->

@@ -21,7 +21,7 @@
                             {{- with .Params.tags }}
                                 <div class="f6 text-gray mt-1">
                                     {{ range . }}
-                                    <a class="muted-link mr-3 d-inline-block" href="/tags/{{ lower . }}">
+                                    <a class="muted-link mr-3 d-inline-block" href="/tags/{{ . | urlize }}">
                                         {{ partial "octicon-tag.html" . }}
                                         {{ . }}
                                     </a>
