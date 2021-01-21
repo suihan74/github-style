@@ -55,7 +55,7 @@ function yearly(year) {
     const node = document.createElement('div');
 
     const itemYear = relativeMonth >= 0 ? year : year + Math.floor(relativeMonth / 12);
-    const itemMonth = relativeMonth >= 0 ? relativeMonth : 12 + relativeMonth % 12;
+    const itemMonth = relativeMonth >= 0 ? relativeMonth : (12 + relativeMonth) % 12;
 
     if (count < 2) {
       node.className = `term-${itemYear}-${itemMonth+1}`;
