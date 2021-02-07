@@ -2,3 +2,9 @@
 To add an extended head section, please create
 `layouts/partials/extended_head.html` in your Hugo directory.
 -->
+
+{{ if not .Site.IsServer }}
+{{ if not .IsHome }}
+<script data-ad-client="{{ .Site.GoogleAdsense }}" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{{ end }}
+{{ end }}
